@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guiClaw - Custom OpenClaw Web GUI</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --border: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        /* Main Card */
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Installation Section */
+        .installation {
+            padding: 2rem;
+            background: var(--light);
+            border-top: 1px solid var(--border);
+        }
+
+        .installation h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .step {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--primary);
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .code-block {
+            background: var(--dark);
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .demo h2 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Version Info */
+        .version-info {
+            background: var(--light);
+            padding: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: white;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .feature-card {
+            animation: fadeIn 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🦀 guiClaw</div>
+            <div class="tagline">Custom OpenClaw Web GUI</div>
+        </header>
+
+        <div class="main-card">
+            <div class="hero">
+                <h1>Welcome to guiClaw</h1>
+                <p>A beautiful, modern web interface for OpenClaw - your personal AI assistant running locally on your machine.</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Web-Based Interface</h3>
+                    <p>Access OpenClaw from any browser on your local network. No terminal required!</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Real-time Chat</h3>
+                    <p>Chat with your AI assistant in a modern, responsive chat interface.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📁</div>
+                    <h3>File Upload</h3>
+                    <p>Upload files directly through the web interface for analysis.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Model Switching</h3>
+                    <p>Switch between different AI models with a single click.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Connect and manage WhatsApp channels directly from the GUI.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Easy Configuration</h3>
+                    <p>View and modify OpenClaw settings through a user-friendly interface.</p>
+                </div>
+            </div>
+
+            <div class="installation">
+                <h2>🚀 Quick Start</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <strong>Start OpenClaw</strong>
+                        <div class="code-block">openclaw gateway start</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <strong>Enable HTTP API</strong>
+                        <div class="code-block">openclaw config set gateway.http.endpoints.responses.enabled true</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <strong>Run guiClaw</strong>
+                        <div class="code-block">node ~/Desktop/guiClaw/proxy.js</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <strong>Open Browser</strong>
+                        <div class="code-block">http://localhost:8000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo">
+                <h2>🎯 Try It Out</h2>
+                <p>Ready to experience guiClaw? Start the server and open it in your browser.</p>
+                <div class="demo-buttons">
+                    <a href="http://localhost:8000" class="btn btn-primary">Launch guiClaw</a>
+                    <a href="https://github.com/openclaw/openclaw" class="btn btn-outline">View on GitHub</a>
+                    <button class="btn btn-secondary" onclick="showDemo()">Watch Demo</button>
+                </div>
+            </div>
+
+            <div class="version-info">
+                <span class="version-badge">Version 3.1</span>
+                <p style="margin-top: 0.5rem; color: var(--gray);">Latest stable release with WhatsApp integration</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>guiClaw - Custom OpenClaw Web GUI | Built with ❤️ for OpenClaw users</p>
+        </footer>
+    </div>
+
+    <script>
+        function showDemo() {
+            alert('Demo coming soon! guiClaw features:\n\n• Real-time chat interface\n• File upload and analysis\n• Model switching\n• WhatsApp channel management\n• Configuration viewer\n• Session management\n\nStart the server to try it yourself!');
+        }
+
+        // Check if guiClaw is running
+        async function checkGuiClaw() {
+            try {
+                const response = await fetch('http://localhost:8000', { 
+                    method: 'HEAD',
+                    mode: 'no-cors'
+                });
+                console.log('guiClaw is running!');
+            } catch (error) {
+                console.log('guiClaw is not running. Start it with: node ~/Desktop/guiClaw/proxy.js');
+            }
+        }
+
+        // Check on page load
+        window.addEventListener('load', checkGuiClaw);
+    </script>
+</body>
+</html>

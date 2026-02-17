@@ -1,0 +1,21 @@
+{
+  "name": "guiclaw-website",
+  "version": "1.0.0",
+  "description": "Modern landing page for guiClaw - Custom OpenClaw Web GUI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "serve": "python3 -m http.server 8080",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "openclaw",
+    "guiclaw",
+    "web-gui",
+    "ai-assistant",
+    "local-ai"
+  ],
+  "author": "Master Au",
+  "license": "MIT",
+  "dependencies": {}
+}

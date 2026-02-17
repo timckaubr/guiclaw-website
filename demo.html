@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guiClaw Demo - Feature Showcase</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .demo-card {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .demo-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .demo-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .demo-card p {
+            color: var(--dark);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .demo-card .icon {
+            font-size: 1.5rem;
+        }
+
+        .demo-card .preview {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            border: 1px solid var(--border);
+        }
+
+        .actions {
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 0.5rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--light);
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            .actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .btn {
+                display: block;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦀 guiClaw Demo</h1>
+            <p>Interactive feature showcase for the OpenClaw Web GUI</p>
+        </div>
+
+        <div class="demo-grid">
+            <div class="demo-card" onclick="showFeature('chat')">
+                <h3><span class="icon">💬</span> Real-time Chat</h3>
+                <p>Chat with your AI assistant in a modern, responsive interface. Supports markdown, code blocks, and file attachments.</p>
+                <div class="preview">> Hello, how can I help you today?</div>
+            </div>
+
+            <div class="demo-card" onclick="showFeature('files')">
+                <h3><span class="icon">📁</span> File Upload</h3>
+                <p>Upload documents, images, and files directly through the web interface for analysis and processing.</p>
+                <div class="preview">📄 upload/document.pdf (2.4 MB)</div>
+            </div>
+
+            <div class="demo-card" onclick="showFeature('models')">
+                <h3><span class="icon">🔄</span> Model Switching</h3>
+                <p>Switch between different AI models with a single click. Supports Xiaomi MiMo, Gemini, and more.</p>
+                <div class="preview">Current: xiaomi/mimo-v2-flash</div>
+            </div>
+
+            <div class="demo-card" onclick="showFeature('whatsapp')">
+                <h3><span class="icon">📱</span> WhatsApp Integration</h3>
+                <p>Connect and manage WhatsApp channels directly from the GUI. QR code scanning and status monitoring.</p>
+                <div class="preview">WhatsApp: ✅ Connected</div>
+            </div>
+
+            <div class="demo-card" onclick="showFeature('config')">
+                <h3><span class="icon">⚙️</span> Configuration</h3>
+                <p>View and modify OpenClaw settings through a user-friendly interface. No terminal required!</p>
+                <div class="preview">Gateway: Running on port 8000</div>
+            </div>
+
+            <div class="demo-card" onclick="showFeature('sessions')">
+                <h3><span class="icon">🎯</span> Session Management</h3>
+                <p>Manage multiple conversation sessions. Switch between contexts and keep track of your AI interactions.</p>
+                <div class="preview">Active sessions: 3</div>
+            </div>
+        </div>
+
+        <div class="actions">
+            <a href="http://localhost:8000" class="btn btn-primary">Launch guiClaw</a>
+            <a href="index.html" class="btn btn-secondary">Back to Home</a>
+            <button class="btn btn-primary" onclick="startDemo()">Start Interactive Demo</button>
+        </div>
+
+        <div class="footer">
+            <p>guiClaw v3.1 | Custom OpenClaw Web GUI | Built for Master Au</p>
+        </div>
+    </div>
+
+    <script>
+        function showFeature(feature) {
+            const features = {
+                chat: "💬 Real-time Chat\n\nThe chat interface features:\n• Markdown rendering\n• Code syntax highlighting\n• File attachments\n• Session history\n• Model switching in chat\n\nTry it: Start guiClaw and open the chat section!",
+                
+                files: "📁 File Upload\n\nSupported file types:\n• Documents (PDF, DOCX, TXT)\n• Images (JPG, PNG, GIF)\n• Code files (JS, PY, HTML, CSS)\n• Archives (ZIP, TAR)\n\nUpload limit: 50MB per file",
+                
+                models: "🔄 Model Switching\n\nAvailable models:\n• Xiaomi MiMo V2 Flash\n• Gemini 3 Pro Preview\n• GPT-4 (if configured)\n• Claude (if configured)\n\nSwitch instantly without restarting!",
+                
+                whatsapp: "📱 WhatsApp Integration\n\nFeatures:\n• QR code scanning\n• Real-time status\n• Message sending\n• Channel management\n• Connection monitoring\n\nNote: Requires WhatsApp Web session",
+                
+                config: "⚙️ Configuration\n\nView and edit:\n• Gateway settings\n• Model configurations\n• Channel settings\n• API endpoints\n• System preferences\n\nAll changes apply instantly!",
+                
+                sessions: "🎯 Session Management\n\nFeatures:\n• Create multiple sessions\n• Switch between contexts\n• Export conversations\n• Archive old sessions\n• Search history\n\nKeep your conversations organized!"
+            };
+
+            alert(features[feature] || "Feature details coming soon!");
+        }
+
+        function startDemo() {
+            const demoSteps = [
+                "🚀 Welcome to guiClaw Interactive Demo!\n\nStep 1: Open guiClaw at http://localhost:8000",
+                "Step 2: Click on 'Chat' section to start a conversation",
+                "Step 3: Try uploading a file using the upload button",
+                "Step 4: Switch models using the dropdown in the header",
+                "Step 5: Check WhatsApp status in the 'Channel' section",
+                "🎉 Demo complete! Explore all features at your own pace."
+            ];
+
+            let currentStep = 0;
+            
+            function showNextStep() {
+                if (currentStep < demoSteps.length) {
+                    alert(demoSteps[currentStep]);
+                    currentStep++;
+                    if (currentStep < demoSteps.length) {
+                        setTimeout(showNextStep, 100);
+                    }
+                }
+            }
+
+            showNextStep();
+        }
+
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🦀 guiClaw Demo loaded successfully!');
+            console.log('Features available:', ['chat', 'files', 'models', 'whatsapp', 'config', 'sessions']);
+        });
+    </script>
+</body>
+</html>
