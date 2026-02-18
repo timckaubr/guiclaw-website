@@ -9,7 +9,7 @@ A modern, responsive landing page for guiClaw - the custom OpenClaw Web GUI.
 - **Interactive Elements**: Hover effects, animations, and demo buttons
 - **Quick Start Guide**: Clear installation and setup instructions
 - **Feature Showcase**: Highlights all key guiClaw features
-- **Version Badge**: Shows current version (v3.1)
+- **Version Badge**: Shows current version (v0.35)
 
 ## Quick Start
 
@@ -66,10 +66,12 @@ You can customize the website by editing:
 
 ## Version
 
-Current version: **v3.1**
-- Includes WhatsApp integration
-- Updated feature cards
-- Improved responsive design
+Current version: **v0.35**
+- Updated to latest guiClaw version
+- 4-step installation guide with copy buttons
+- Improved UI with consistent styling
+- Token auto-loading feature
+- Clean interface with status bar removed
 
 ## Browser Compatibility
 
