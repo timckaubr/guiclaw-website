@@ -267,10 +267,22 @@
             font-size: 0.875rem;
             z-index: 100;
             display: none;
+            line-height: 1.4;
+        }
+
+        .connection-status strong {
+            display: block;
+            margin-bottom: 0.25rem;
         }
 
         .connection-status.show {
             display: block;
+        }
+
+        .connection-status .mobile-note {
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
         }
 
         /* Empty State */
@@ -363,7 +375,9 @@
 <body>
     <!-- Connection Status Banner -->
     <div class="connection-status" id="connectionStatus">
-        ⚠️ guiClaw server is not running. Please start it first: <code>node ~/Desktop/guiClaw/proxy.js</code>
+        <strong>⚠️ guiClaw server is not running</strong>
+        Please start it first: <code>node ~/Desktop/guiClaw/proxy.js</code>
+        <div class="mobile-note">📱 Mobile users: This requires guiClaw server running on your computer</div>
     </div>
 
     <!-- Header -->
@@ -389,10 +403,20 @@
             <div class="empty-state" id="emptyState">
                 <div class="icon">💬</div>
                 <h3>Welcome to guiClaw Chat</h3>
-                <p>Start a conversation with your AI assistant. Make sure guiClaw server is running on port 8000.</p>
+                <p>Start a conversation with your AI assistant.</p>
                 <p style="margin-top: 1rem; font-size: 0.875rem;">
-                    <strong>Start server:</strong><br>
+                    <strong>⚠️ Requirements:</strong><br>
+                    1. guiClaw server must be running on your computer<br>
+                    2. Server must be accessible from this device<br>
+                    3. Mobile devices can only connect if on same network
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.875rem;">
+                    <strong>Start server on your computer:</strong><br>
                     <code>node ~/Desktop/guiClaw/proxy.js</code>
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.875rem; color: #92400e;">
+                    <strong>📱 Mobile Users:</strong> This chat interface requires guiClaw server to be running on your computer. 
+                    On mobile, you can view the interface but cannot connect to the local server unless you're on the same network and the server is configured for remote access.
                 </p>
             </div>
         </div>
@@ -480,7 +504,7 @@
                 }
             } catch (error) {
                 isConnected = false;
-                updateStatus('disconnected', 'Not connected');
+                updateStatus('disconnected', 'Server not running');
                 disableInput();
                 showConnectionStatus();
                 console.error('Connection error:', error);
